@@ -1,0 +1,10 @@
+<project name="nodejs-redis" url="https://github.com/dionjwa/node_redis" license="BSD">
+        <user name="dionjwa"/>
+        <description>Redis Node.js externs and object store to add, index, and retrieve Haxe objects.</description>
+        <version name="0.1">Initial import</version>
+        <depends name="remoting"/>
+        <depends name="nodejs"/>
+        <tag v="nodejs"/>
+        <tag v="redis"/>
+        <tag v="js"/>
+</project>
