@@ -2,7 +2,7 @@
 [nodejs]: http://nodejs.org/
 [bdogpstore]: https://github.com/blackdog66/bdog-pstore
 
-# Redis object store for [Node.js] in [Haxe][haxe]
+# Redis object store for [Node.js][nodejs] in [Haxe][haxe]
 
 Store arbitrary Haxe objects in a Redis database and index across any object field.
 
