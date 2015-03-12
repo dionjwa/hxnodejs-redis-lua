@@ -1,9 +1,11 @@
 {
   "contributors": [
-    "dionjwa",
+    "dionjwa"
   ],
   "classPath": "src",
-  "dependencies": {'nodejs'},
+  "dependencies": {
+    "nodejs": "2.2.8"
+  },
   "description": "Externs for node_redis https://github.com/mranney/node_redis. Major.minor numbers match redis version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version",
   "license": "BSD",
   "name": "nodejs-redis",
@@ -15,5 +17,5 @@
     "redis"
   ],
   "url": "https://github.com/dionjwa/nodejs-redis",
-  "version": "2.2.7"
+  "version": "0.0.1"
 }

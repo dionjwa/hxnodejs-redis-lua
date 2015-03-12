@@ -1,0 +1,12 @@
+-debug
+
+-lib promhx
+-lib nodejs
+-lib promise-tests
+
+-cp test
+-cp src
+
+-main Tests
+
+-js test/tests.js

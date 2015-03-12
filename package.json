@@ -1,0 +1,24 @@
+{
+  "name": "haxe-nodejs-redis",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Dion Whitehead Amago <dion@transition9.com>",
+  "contributors": [{
+    "name": "Dion Whitehead Amago",
+    "email": "dion@transition9.com"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dionjwa/nodejs-redis"
+  },
+  "keywords": [
+    "haxe",
+    "node.js",
+    "redis"
+  ],
+  "dependencies": {
+    "redis": "*"
+  },
+  "private": true,
+  "license": "MIT"
+}
