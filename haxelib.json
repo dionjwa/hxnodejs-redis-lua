@@ -1,6 +1,9 @@
 {
-    "description": "Externs for node_redis https://github.com/mranney/node_redis. Major.minor numbers match the node_redis npm version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version", 
     "license": "BSD", 
+    "description": "Externs for node_redis https://github.com/mranney/node_redis. Major.minor numbers match the node_redis npm version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version", 
+    "contributors": [
+        "dionjwa"
+    ], 
     "tags": [
         "nodejs", 
         "node.js", 
@@ -8,12 +11,9 @@
         "redis"
     ], 
     "url": "https://github.com/dionjwa/nodejs-redis", 
-    "classPath": "src", 
-    "contributors": [
-        "dionjwa"
-    ], 
     "releasenote": "Initial upload", 
-    "version": "0.12.3", 
+    "classPath": "src", 
+    "version": "0.12.4", 
     "dependencies": {
         "nodejs": "2.2.7"
     }, 
