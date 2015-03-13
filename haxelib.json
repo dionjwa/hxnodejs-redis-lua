@@ -8,14 +8,14 @@
         "redis"
     ], 
     "url": "https://github.com/dionjwa/nodejs-redis", 
-    "releasenote": "Initial upload", 
-    "version": "0.12.2", 
     "classPath": "src", 
-    "dependencies": {
-        "nodejs": "2.2.7"
-    }, 
     "contributors": [
         "dionjwa"
     ], 
+    "releasenote": "Initial upload", 
+    "version": "0.12.3", 
+    "dependencies": {
+        "nodejs": "2.2.7"
+    }, 
     "name": "nodejs-redis"
 }
