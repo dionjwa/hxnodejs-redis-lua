@@ -6,7 +6,7 @@
   "dependencies": {
     "nodejs": "2.2.8"
   },
-  "description": "Externs for node_redis https://github.com/mranney/node_redis. Major.minor numbers match redis version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version",
+  "description": "Externs for node_redis https://github.com/mranney/node_redis. Major.minor numbers match the node_redis npm version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version",
   "license": "BSD",
   "name": "nodejs-redis",
   "releasenote": "Initial upload",
@@ -17,5 +17,5 @@
     "redis"
   ],
   "url": "https://github.com/dionjwa/nodejs-redis",
-  "version": "0.0.1"
+  "version": "0.12.1"
 }

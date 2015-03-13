@@ -1,11 +1,9 @@
-[haxe]: http://haxe.org
-[nodejs]: http://nodejs.org/
-[bdogpstore]: https://github.com/blackdog66/bdog-pstore
+# [Haxe](http://haxe.org) [Node.js](http://nodejs.org/) bindings for Redis
 
-# Redis object store for [Node.js][nodejs] in [Haxe][haxe]
+[Haxe](http://haxe.org) bindings for the [Node.js](http://nodejs.org/) [Redis](http://redis.io/) client https://github.com/mranney/node_redis.
 
-Store arbitrary Haxe objects in a Redis database and index across any object field.
+Usage
 
-It's based on [Ritchie's PStore code][bdogpstore]. The main difference is that stored objects do not have to extend PObj. 
+docker run -d --name redis -p 6379:6379 dockerfile/redis
 
 
