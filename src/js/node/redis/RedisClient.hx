@@ -100,6 +100,7 @@ extern class RedisClient extends NodeEventEmitter
   public function hset(k:String,f:String,v:String,cb:IntegerReply):Void;
   public function hget(k:String,f:String,cb:BulkReply):Void;
   public function hsetnx(k:String,f:String,v:String,cb:IntegerReply):Void;
+  @:overload(function(k:String,f:Dynamic<String>,cb:StatusReply):Void {})
   public function hmset(k:String, f:Array<String>,cb:StatusReply):Void;
   public function hmget(k:Array<String>,cb:MultiReply):Void;
   public function hincrby(k:String,f:String,v:Int,cb:IntegerReply):Void;
