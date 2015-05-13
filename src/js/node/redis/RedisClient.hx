@@ -96,7 +96,7 @@ extern class RedisClient extends NodeEventEmitter
   public function srandmember(k:String,cb:BulkReply):Void;
 
   // hash
-  // @:overload(function(args:Array<String>, cb:IntegerReply):Void {})
+  @:overload(function(args:Array<String>, cb:IntegerReply):Void {})
   public function hset(k:String,f:String,v:String,cb:IntegerReply):Void;
   public function hget(k:String,f:String,cb:BulkReply):Void;
   public function hsetnx(k:String,f:String,v:String,cb:IntegerReply):Void;
