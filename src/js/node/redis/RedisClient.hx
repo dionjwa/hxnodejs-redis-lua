@@ -8,6 +8,11 @@ typedef IntegerReply = Err->Int->Void;
 typedef StatusReply = Err->String->Void;
 typedef BulkReply = Err->Dynamic->Void;
 typedef MultiReply = Err->Array<Dynamic>->Void;
+typedef MultiCommand = Array<Dynamic>;
+
+typedef Multi = {
+  function exec(cb :MultiReply) :Void;
+}
 
 @:native("RedisClient")
 extern class RedisClient extends NodeEventEmitter
@@ -127,6 +132,9 @@ extern class RedisClient extends NodeEventEmitter
   public function zunionstore(prms:Array<Dynamic>,cb:IntegerReply):Void;
   public function zinterstore(prms:Array<Dynamic>,cb:IntegerReply):Void;
   public function sort(prms:Array<Dynamic>,cb:MultiReply):Void;
+
+  // Misc
+  public function multi(?prms:Array<MultiCommand>):Multi;
 
   private function new();
 
