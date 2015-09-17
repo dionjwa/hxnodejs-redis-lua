@@ -1,13 +1,18 @@
-package js.node.redis;
+package js.npm;
 
 import js.Node;
-import js.node.EventEmitter;
+import js.node.events.EventEmitter;
+import js.support.Error;
 
-typedef Err = Dynamic;
-typedef IntegerReply = Err->Int->Void;
-typedef StatusReply = Err->String->Void;
-typedef BulkReply = Err->Dynamic->Void;
-typedef MultiReply = Err->Array<Dynamic>->Void;
+typedef Channel = String;
+typedef ChannelCount = Int;
+typedef IntegerReply = Error->Int->Void;
+typedef BooleanReply = Error->Bool->Void;
+typedef StatusReply = Error->String->Void;
+typedef SubscribeReply = Channel->ChannelCount->Void;
+typedef MessageReply = Channel->String->Void;
+typedef BulkReply = Error->Dynamic->Void;
+typedef MultiReply = Error->Array<Dynamic>->Void;
 typedef MultiCommand = Array<Dynamic>;
 
 typedef Multi = {
@@ -15,7 +20,8 @@ typedef Multi = {
 }
 
 @:native("RedisClient")
-extern class RedisClient extends NodeEventEmitter
+extern class RedisClient extends js.node.events.EventEmitter
+  implements npm.Package.Require<"redis","*">
 {
   inline public static var EVENT_READY :String = "ready";
   inline public static var EVENT_CONNECT :String = "connect";
@@ -23,6 +29,12 @@ extern class RedisClient extends NodeEventEmitter
   inline public static var EVENT_DRAIN :String = "drain";
   inline public static var EVENT_IDLE :String = "idle";
   inline public static var EVENT_ERROR :String = "error";
+  inline public static var EVENT_SUBSCRIBE :String = "subscribe";
+  inline public static var EVENT_PSUBSCRIBE :String = "psubscribe";
+  inline public static var EVENT_UNSUBSCRIBE :String = "unsubscribe";
+  inline public static var EVENT_PUNSUBSCRIBE :String = "punsubscribe";
+  inline public static var EVENT_MESSAGE :String = "message";
+  inline public static var EVENT_PMESSAGE :String = "pmessage";
 
   public static function createClient(?port :Int, ?address :String, ?options :Dynamic):RedisClient;
   public static function print(?arg1 :Dynamic, ?arg2 :Dynamic, ?arg3 :Dynamic, ?arg4 :Dynamic):Void;
@@ -54,16 +66,16 @@ extern class RedisClient extends NodeEventEmitter
   public function flushall(cb:StatusReply):Void;
 
   // strings
-  public function set(k:String,v:String,cb:Err->Bool->Void):Void;
+  public function set(k:String,v:String,cb:BooleanReply):Void;
   public function get(k:String,cb:StatusReply):Void;
   public function incr(k:String,cb:IntegerReply):Void;
   public function incrby(k:String,by:Int,cb:IntegerReply):Void;
   public function decr(k:String,cb:IntegerReply):Void;
   public function decrby(k:String,by:Int,cb:IntegerReply):Void;
-  public function setnx(k:String,v:String,cb:Err->Bool->Void):Void;
-  public function mset(ks:Array<Dynamic>,cb:Err->Bool->Void):Void;
-  public function msetnx(ks:Array<Dynamic>,cb:Err->Bool->Void):Void;
-  public function mget(ks:Array<String>,cb:Err->Array<String>->Void):Void;
+  public function setnx(k:String,v:String,cb:BooleanReply):Void;
+  public function mset(ks:Array<Dynamic>,cb:BooleanReply):Void;
+  public function msetnx(ks:Array<Dynamic>,cb:BooleanReply):Void;
+  public function mget(ks:Array<String>,cb:Error->Array<String>->Void):Void;
   public function getset(k:String,v:String,cb:StatusReply):Void;
   public function append(k:String,v:String,cb:IntegerReply):Void;
   public function substr(k:String,s:Int,e:Int,cb:StatusReply):Void;
@@ -133,14 +145,12 @@ extern class RedisClient extends NodeEventEmitter
   public function zinterstore(prms:Array<Dynamic>,cb:IntegerReply):Void;
   public function sort(prms:Array<Dynamic>,cb:MultiReply):Void;
 
+  // pubsub
+  public function subscribe(c:Channel):Void;
+  public function publish(c:Channel,m:String):Void;
+
   // Misc
   public function multi(?prms:Array<MultiCommand>):Multi;
 
   private function new();
-
-  private static function __init__() : Void untyped
-  {
-    var RedisClient = untyped __js__("require('redis')");
-  }
 }
-

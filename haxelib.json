@@ -14,8 +14,6 @@
     "releasenote": "Initial upload", 
     "classPath": "src", 
     "version": "0.12.4", 
-    "dependencies": {
-        "nodejs": "2.2.7"
-    }, 
+    "dependencies": {}, 
     "name": "nodejs-redis"
 }

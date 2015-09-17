@@ -3,7 +3,7 @@ import haxe.unit.async.PromiseTest;
 import promhx.Promise;
 import promhx.Deferred;
 
-import js.node.redis.RedisClient;
+import js.npm.RedisClient;
 
 class TestRedis extends PromiseTest
 {

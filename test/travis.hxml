@@ -1,11 +1,13 @@
 -debug
 
--lib promhx
--lib nodejs
--lib promise-tests
+-D nodejs
 
--cp test
+-lib promhx
+-lib promhx-unit-test
+
+-cp lib/haxe-js-kit
 -cp src
+-cp test
 
 -main Tests
 

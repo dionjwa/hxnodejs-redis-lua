@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "",
   "author": "Dion Whitehead Amago <dion@transition9.com>",
-  "contributors": [{
-    "name": "Dion Whitehead Amago",
-    "email": "dion@transition9.com"
-  }],
+  "contributors": [
+    {
+      "name": "Dion Whitehead Amago",
+      "email": "dion@transition9.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/dionjwa/nodejs-redis"
@@ -20,5 +22,8 @@
     "redis": "0.12.1"
   },
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "redis-mock": "^0.4.9"
+  }
 }

@@ -2,5 +2,6 @@ node_modules
 test/tests.js
 test/tests.js.map
 build.hxml
-nodejs-redis.sublime-project
-nodejs-redis.sublime-workspace
+*.sublime-project
+*.sublime-workspace
+.haxelib
