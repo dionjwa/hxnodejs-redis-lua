@@ -13,7 +13,7 @@
     "url": "https://github.com/dionjwa/nodejs-redis", 
     "releasenote": "Initial upload", 
     "classPath": "src", 
-    "version": "1.0.0", 
+    "version": "1.0.1", 
     "dependencies": {}, 
     "name": "nodejs-redis"
 }
