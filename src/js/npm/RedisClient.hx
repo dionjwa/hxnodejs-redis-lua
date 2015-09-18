@@ -134,7 +134,7 @@ extern class RedisClient extends js.node.events.EventEmitter
   public function zincrby(k:String,i:Int,m:String,cb:IntegerReply):Void;
   public function zrank(k:String,m:String,cb:BulkReply):Void;
   public function zrankrev(k:String,m:String,cb:BulkReply):Void;
-  public function zrange(k:String,s:Int,e:Int,?scores:Bool,cb:MultiReply):Void;
+  public function zrange(k:String,s:Int,e:Int,cb:MultiReply):Void;
   public function zrevrange(k:String,s:Int,e:Int,cb:MultiReply):Void;
   public function zrangebyscore(k:String,min:Int,max:Int,cb:MultiReply):Void;
   public function zremrangebyrank(k:String,s:Int,e:Int,cb:IntegerReply):Void;
@@ -151,6 +151,8 @@ extern class RedisClient extends js.node.events.EventEmitter
 
   // Misc
   public function multi(?prms:Array<MultiCommand>):Multi;
+  public function eval(prms:MultiCommand,cb:Error->Dynamic->Void):Void;
+  public function evalsha(prms:MultiCommand,cb:Error->Dynamic->Void):Void;
 
   private function new();
 }
