@@ -38,7 +38,9 @@ extern class RedisClient extends js.node.events.EventEmitter
 
   public static function createClient(?port :Int, ?address :String, ?options :Dynamic):RedisClient;
   public static function print(?arg1 :Dynamic, ?arg2 :Dynamic, ?arg3 :Dynamic, ?arg4 :Dynamic):Void;
-  // control
+
+  public var connectionOption :{host:String, port:Int};
+
   /** Forcibly close the connection to the Redis server. Note that this does not wait until all replies have been parsed. */
   public function end():Void;
   /** Exit cleanly. */
@@ -82,6 +84,7 @@ extern class RedisClient extends js.node.events.EventEmitter
   public function setex(k:String,t:Int,v:Dynamic,cb:StatusReply):Void;
 
   // lists
+  @:overload(function(args:Array<String>, cb:IntegerReply):Void {})
   public function lpush(k:String,v:String,cb:IntegerReply):Void;
   public function rpush(k:String,v:String,cb:IntegerReply):Void;
   public function llen(k:String,cb:IntegerReply):Void;
