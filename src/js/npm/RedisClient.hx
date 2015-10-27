@@ -151,6 +151,8 @@ extern class RedisClient extends js.node.events.EventEmitter
   // pubsub
   public function subscribe(c:Channel):Void;
   public function unsubscribe(c:Channel):Void;
+  public function psubscribe(c:Channel):Void;
+  public function punsubscribe(c:Channel):Void;
   public function publish(c:Channel,m:String):Void;
 
   // Misc
