@@ -11,9 +11,9 @@
         "redis"
     ], 
     "url": "https://github.com/dionjwa/nodejs-redis", 
-    "releasenote": "Minor update: added unsubscribe.", 
+    "releasenote": "Minor update: added psubscribe.", 
     "classPath": "src", 
-    "version": "1.0.3", 
+    "version": "1.0.4", 
     "dependencies": {}, 
     "name": "nodejs-redis"
 }
