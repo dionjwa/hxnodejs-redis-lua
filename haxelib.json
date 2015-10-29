@@ -11,9 +11,9 @@
         "redis"
     ], 
     "url": "https://github.com/dionjwa/nodejs-redis", 
-    "releasenote": "Minor update: multiple members for sadd.", 
+    "releasenote": "Minor update: fix sadd.", 
     "classPath": "src", 
-    "version": "1.0.5", 
+    "version": "1.0.6", 
     "dependencies": {}, 
     "name": "nodejs-redis"
 }

@@ -103,6 +103,7 @@ extern class RedisClient extends js.node.events.EventEmitter
   @:overload(function(args:Array<String>, cb:IntegerReply):Void {})
   public function sadd(k:String,v:String,cb:IntegerReply):Void;
   public function srem(k:String,v:String,cb:IntegerReply):Void;
+  @:overload(function(k:String,count:Int,cb:BulkReply):Void {})
   public function spop(k:String,cb:BulkReply):Void;
   public function smove(sk:String,dk:String,member:String,cb:IntegerReply):Void;
   public function scard(k:String,cb:IntegerReply):Void;
