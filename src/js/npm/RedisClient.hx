@@ -100,6 +100,7 @@ extern class RedisClient extends js.node.events.EventEmitter
   public function rpoplpush(sk:String,dk:String,cb:BulkReply):Void;
 
   // sets
+  @:overload(function(args:Array<String>, cb:IntegerReply):Void {})
   public function sadd(k:String,v:String,cb:IntegerReply):Void;
   public function srem(k:String,v:String,cb:IntegerReply):Void;
   public function spop(k:String,cb:BulkReply):Void;
