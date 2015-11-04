@@ -19,9 +19,8 @@ typedef Multi = {
   function exec(cb :MultiReply) :Void;
 }
 
-@:native("RedisClient")
-extern class RedisClient extends js.node.events.EventEmitter
-  implements npm.Package.Require<"redis","*">
+@:jsRequire('redis')
+extern class RedisClient extends js.node.events.EventEmitter<Dynamic>
 {
   inline public static var EVENT_READY :String = "ready";
   inline public static var EVENT_CONNECT :String = "connect";
