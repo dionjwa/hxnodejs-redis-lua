@@ -19,15 +19,20 @@ typedef Multi = {
   function exec(cb :MultiReply) :Void;
 }
 
+@:enum abstract RedisEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
+  var Ready : RedisEvent<Void->Void> = "ready";
+  var Connect : RedisEvent<Void->Void> = "connect";
+  var Reconnecting : RedisEvent<{delay:Int,attempt:Int}->Void> = "reconnecting";
+  var Error : RedisEvent<Error->Void> = "error";
+  var End : RedisEvent<Void->Void> = "end";
+  var Drain : RedisEvent<Bool->Void> = "drain";
+  var Warning : RedisEvent<Bool->Void> = "warning";
+  var Idle : RedisEvent<Bool->Void> = "idle";
+}
+
 @:jsRequire('redis')
 extern class RedisClient extends js.node.events.EventEmitter<Dynamic>
 {
-  inline public static var EVENT_READY :String = "ready";
-  inline public static var EVENT_CONNECT :String = "connect";
-  inline public static var EVENT_END :String = "end";
-  inline public static var EVENT_DRAIN :String = "drain";
-  inline public static var EVENT_IDLE :String = "idle";
-  inline public static var EVENT_ERROR :String = "error";
   inline public static var EVENT_SUBSCRIBE :String = "subscribe";
   inline public static var EVENT_PSUBSCRIBE :String = "psubscribe";
   inline public static var EVENT_UNSUBSCRIBE :String = "unsubscribe";

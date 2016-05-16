@@ -11,9 +11,9 @@
         "redis"
     ], 
     "url": "https://github.com/dionjwa/nodejs-redis", 
-    "releasenote": "Using official hxnodejs externs", 
+    "releasenote": "Using better event abstracts.", 
     "classPath": "src", 
-    "version": "1.1.0", 
+    "version": "1.1.1", 
     "dependencies": {}, 
     "name": "nodejs-redis"
 }
