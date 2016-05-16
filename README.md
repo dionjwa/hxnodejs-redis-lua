@@ -18,9 +18,9 @@ Usage:
 					trace('Err: ' + err);
 				} else {
 					trace('Success: ' + (result == value));
+					redisClient.quit();
 				}
 			});
 		}
 	});
-	redisClient.quit();
 
