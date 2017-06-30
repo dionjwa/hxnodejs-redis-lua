@@ -28,18 +28,17 @@ typedef Multi = {
   var Drain : RedisEvent<Bool->Void> = "drain";
   var Warning : RedisEvent<Bool->Void> = "warning";
   var Idle : RedisEvent<Bool->Void> = "idle";
+  var Message : RedisEvent<Bool->Void> = "message";
+  var PMessage : RedisEvent<Bool->Void> = "pmessage";
+  var Subscribe : RedisEvent<Bool->Void> = "subscribe";
+  var PSubscribe : RedisEvent<Bool->Void> = "psubscribe";
+  var Unsubscribe : RedisEvent<Bool->Void> = "unsubscribe";
+  var PUnsubscribe : RedisEvent<Bool->Void> = "punsubscribe";
 }
 
 @:jsRequire('redis')
 extern class RedisClient extends js.node.events.EventEmitter<Dynamic>
 {
-  inline public static var EVENT_SUBSCRIBE :String = "subscribe";
-  inline public static var EVENT_PSUBSCRIBE :String = "psubscribe";
-  inline public static var EVENT_UNSUBSCRIBE :String = "unsubscribe";
-  inline public static var EVENT_PUNSUBSCRIBE :String = "punsubscribe";
-  inline public static var EVENT_MESSAGE :String = "message";
-  inline public static var EVENT_PMESSAGE :String = "pmessage";
-
   public static function createClient(?port :Int, ?address :String, ?options :Dynamic):RedisClient;
   public static function print(?arg1 :Dynamic, ?arg2 :Dynamic, ?arg3 :Dynamic, ?arg4 :Dynamic):Void;
 
