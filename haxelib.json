@@ -1,19 +1,21 @@
 {
     "license": "BSD", 
-    "description": "Externs for node_redis https://www.npmjs.com/package/redis. Major.minor numbers match the node_redis npm version. Patch version is only for this library (i.e. patch version doesn't match the backing node_redis version", 
+    "description": "Externs for redis (node.js) plus use utilities for redis lua scripting and more.", 
     "contributors": [
         "dionjwa"
     ], 
     "tags": [
         "nodejs", 
         "node.js", 
+        "nodejs", 
         "js", 
-        "redis"
+        "redis",
+        "lua"
     ], 
-    "url": "https://github.com/dionjwa/nodejs-redis", 
+    "url": "https://github.com/dionjwa/haxe-nodejs-redis", 
     "releasenote": "Using better event abstracts.", 
     "classPath": "src", 
-    "version": "1.1.1", 
+    "version": "1.2.0", 
     "dependencies": {}, 
     "name": "nodejs-redis"
 }

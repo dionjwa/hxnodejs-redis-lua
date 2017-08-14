@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  # haxe:
+  #   volumes:
+  #     - ./src:/app/src
+  #     - ./build:/app/build
+  #   # image: "haxe:3.4.2"
+  #   command: ["node", "server/cloud-compute-cannon-server.js"]
+  #   links:
+  #     - redis
+
+  redis:
+    # image: "dionjwa/cloud-compute-cannon-redis:0.2.2"
+    image: "redis:4-alpine"
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    image: tenstartups/redis-commander
+    command: --redis-host redis
+    links:
+      - redis
+    ports:
+      - "8081:8081"

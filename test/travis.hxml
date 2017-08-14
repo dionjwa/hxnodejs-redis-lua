@@ -2,13 +2,15 @@
 
 -D nodejs
 
+-lib hxnodejs:4.0.9
 -lib promhx
--lib promhx-unit-test
+-lib promhx-unit-test:2.1.2
 
--cp lib/haxe-js-kit
 -cp src
 -cp test
 
 -main Tests
 
--js test/tests.js
+-js build/tests.js
+
+# -cmd node build/tests.js

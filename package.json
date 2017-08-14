@@ -1,6 +1,6 @@
 {
   "name": "haxe-nodejs-redis",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "",
   "author": "Dion Whitehead Amago <dion@transition9.com>",
   "contributors": [
@@ -11,19 +11,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dionjwa/nodejs-redis"
+    "url": "https://github.com/dionjwa/haxe-nodejs-redis"
   },
   "keywords": [
     "haxe",
-    "node.js",
+    "nodejs",
+    "node",
+    "lua",
     "redis"
   ],
   "dependencies": {
-    "redis": "0.12.1"
+    "redis": "2.8.0"
   },
   "private": true,
-  "license": "MIT",
-  "devDependencies": {
-    "redis-mock": "^0.4.9"
-  }
+  "license": "MIT"
 }
