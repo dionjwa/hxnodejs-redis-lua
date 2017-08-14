@@ -153,16 +153,6 @@ class RedisObject
 			);
 		}
 
-		// if (!fields.exists(function(f) return f.name == VAR_NAME_SCRIPT_SHAS)) {
-		// 	fields.push(
-		// 		{
-		// 			name: VAR_NAME_SCRIPT_SHAS_TOIDS,
-		// 			access: [Access.AStatic],
-		// 			kind: FieldType.FVar(macro : Map<String, String>, macro new Map()),
-		// 			pos: pos,
-		// 		}
-		// 	);
-		// }
 		fields.push(
 			{
 				name: VAR_NAME_EVALUATE_SCRIPT,
