@@ -8,7 +8,7 @@ echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
 
 echo "Running tests"
 #Run the tests
-TRAVIS=1 run with docker-compose up --abort-on-container-exit
+TRAVIS=1 docker-compose up --abort-on-container-exit
 
 # if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_REPO_SLUG" == "Autodesk/cloud-compute-cannon" ];
 # 	then

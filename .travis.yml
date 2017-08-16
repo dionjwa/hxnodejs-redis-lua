@@ -24,4 +24,4 @@ before_install:
   - docker ps
 
 script:
-  - /bin/bash bin/run-travis
+  - docker-compose up --abort-on-container-exit
