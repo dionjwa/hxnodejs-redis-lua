@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ev
+set -e
 
 echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
 echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
@@ -8,7 +8,13 @@ echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
 
 echo "Running tests"
 #Run the tests
-TRAVIS=1 docker-compose up --abort-on-container-exit
+# TRAVIS=1 docker-compose up --abort-on-container-exit
+
+docker-compose up --abort-on-container-exit ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | while read code; do
+    if [ "$code" == "1" ]; then
+       exit -1
+    fi
+done
 
 # if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_REPO_SLUG" == "Autodesk/cloud-compute-cannon" ];
 # 	then
