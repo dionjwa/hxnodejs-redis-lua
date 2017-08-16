@@ -7,6 +7,7 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 
 using Lambda;
+using StringTools;
 
 class RedisObject
 {
@@ -26,31 +27,66 @@ class RedisObject
 
 		createScriptsFields(fields, pos);
 
-		var luaFunctionToCodeMap : Array<Expr> = [];
+		var luaScripts = new Map<String,String>();
 
 		for (field in fields) {
 			var luaScript = getLuaScriptFromField(field, pos);
 			if (luaScript != null) {
-				insertLuaScriptCallInFunction(field, luaScript, pos);
 				//Add the code to an internal map
-				luaFunctionToCodeMap.push(macro $v{field.name} => $v{luaScript});
+				luaScripts.set(field.name, luaScript);
+				insertLuaScriptCallInFunction(field, luaScript, pos);
 			}
 		}
-
-		fields.push({
-			// The line position that will be referenced on error
-			pos: pos,
-			// Field name
-			name: VAR_NAME_SCRIPTS,
-			// Attached metadata (we are not adding any)
-			meta: null,
-			// Field type is Map<String, String>, `luaFunctionToCodeMap` is the map
-			kind: FieldType.FVar(macro : Map<String, String>, macro $a{luaFunctionToCodeMap}),
-			// Documentation (we are not adding any)
-			doc: null,
-			// Field visibility
-			access: [Access.AStatic]
-		});
+		//Either add the lua scripts to an existing map variable,
+		//or create a new var
+		var scriptsField = fields.find(function(f) return f.name == VAR_NAME_SCRIPTS);
+		if (scriptsField != null) {
+			switch(scriptsField.kind) {
+				case FVar(t, e):
+					switch(t) {
+						case TPath(pathData):
+							if (pathData.name != 'Map') {
+								Context.error('${Context.getLocalModule()}: VAR_NAME_SCRIPTS variable must be a Map<String,String>', pos);
+							}
+						default:
+							Context.error('${Context.getLocalModule()}: VAR_NAME_SCRIPTS variable must be a Map<String,String>', pos);
+					}
+					switch(e.expr) {
+						case EArrayDecl(arrayOfExpr):
+							for (name in luaScripts.keys()) {
+								arrayOfExpr.push(macro $v{name} => $v{luaScripts.get(name)});
+							}
+						default:
+							Context.error('${Context.getLocalModule()}: VAR_NAME_SCRIPTS variable must be a Map<String,String> declared inline: https://haxe.org/manual/std-Map.html', pos);
+					}
+				default:
+					Context.error('${Context.getLocalModule()}: VAR_NAME_SCRIPTS variable must be a Map<String,String>', pos);
+				}
+		} else {
+			var luaFunctionToCodeMap : Array<Expr> = [];
+			for (name in luaScripts.keys()) {
+				luaFunctionToCodeMap.push(macro $v{name} => $v{luaScripts.get(name)});
+			}
+			//Get any fields that are upper case the same name
+			//as the function, and those strings will go in
+			// for (field in fields) {
+			// 	if ()
+			// }
+			fields.push({
+				// The line position that will be referenced on error
+				pos: pos,
+				// Field name
+				name: VAR_NAME_SCRIPTS,
+				// Attached metadata (we are not adding any)
+				meta: null,
+				// Field type is Map<String, String>, `luaFunctionToCodeMap` is the map
+				kind: FieldType.FVar(macro : Map<String, String>, macro $a{luaFunctionToCodeMap}),
+				// Documentation (we are not adding any)
+				doc: null,
+				// Field visibility
+				access: [Access.AStatic]
+			});
+		}
 
 		return fields;
 	}
@@ -72,6 +108,7 @@ class RedisObject
 				Context.error('${Context.getLocalModule()}: @redis({lua:...}) metadata can only be applied to a function.', pos);
 		}
 	}
+
 	static function getLuaScriptFromField(field :Field, pos :Position) :String
 	{
 		if (field.meta != null) {
@@ -127,7 +164,7 @@ class RedisObject
 				{
 					name: VAR_NAME_REDIS_CLIENT,
 					access: [Access.AStatic],
-					kind: FieldType.FVar(macro : js.npm.RedisClient, null),
+					kind: FieldType.FVar(macro : js.npm.redis.RedisClient, null),
 					pos: pos,
 				}
 			);
@@ -183,18 +220,54 @@ class RedisObject
 		);
 		fields.push(
 			{
+				name: 'scriptsToString',
+				access: [Access.APublic, Access.AStatic],
+				kind: FFun({
+					args: [],
+					expr: Context.parse(
+						'{
+							var obj = {};\n
+							for (k in $VAR_NAME_SCRIPTS.keys()) {
+								Reflect.setField(obj, k, $VAR_NAME_SCRIPTS.get(k));\n
+							}
+							return "" + obj;//haxe.Json.stringify(obj, null, "  ");\n
+						}'
+						, pos),
+					params: [],
+					ret: ComplexType.TPath({name:'String',pack:[]}),
+				}),
+				pos: pos,
+			}
+		);
+		var scriptReplaceEreg = '.*(\\\\$${?[a-zA-Z0-9_]+}?).*';
+		fields.push(
+			{
 				name: 'init',
 				access: [Access.AStatic, Access.APublic],
 				kind: FFun({
 					args: [
 						{
 							name: 'redis',
-							type: macro: js.npm.RedisClient,
+							type: macro: js.npm.redis.RedisClient,
 							opt: false
 						}
 					],
 					expr: Context.parse(
 					'{
+						for (key in $VAR_NAME_SCRIPTS.keys()) {
+							var script = $VAR_NAME_SCRIPTS.get(key);
+							for (classFieldName in Type.getClassFields(${Context.getLocalModule()})) {
+								var classFieldContent = Reflect.field(${Context.getLocalModule()}, classFieldName);
+								script = StringTools.replace(script, "$${" + classFieldName + "}", classFieldContent);
+							}
+
+							for (key2 in $VAR_NAME_SCRIPTS.keys()) {
+								var otherScript = $VAR_NAME_SCRIPTS.get(key2);
+								script = StringTools.replace(script, "$${" + key2 + "}", otherScript);
+							}
+
+							$VAR_NAME_SCRIPTS.set(key, script);
+						}
 						$VAR_NAME_REDIS_CLIENT = redis;
 						return t9.redis.RedisLuaTools.initLuaScripts($VAR_NAME_REDIS_CLIENT, $VAR_NAME_SCRIPTS)
 							.then(function(scriptIdsToShas :Map<String, String>) {

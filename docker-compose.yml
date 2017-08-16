@@ -1,15 +1,20 @@
+# run with docker-compose up --abort-on-container-exit
 version: '2'
 
 services:
 
-  # haxe:
-  #   volumes:
-  #     - ./src:/app/src
-  #     - ./build:/app/build
-  #   # image: "haxe:3.4.2"
-  #   command: ["node", "server/cloud-compute-cannon-server.js"]
-  #   links:
-  #     - redis
+  haxe:
+    build:
+      context: "."
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./test:/usr/src/app/test
+      # - ./build:/app/build
+    # image: "haxe:3.4.2"
+    # command: ["node", "server/cloud-compute-cannon-server.js"]
+    command: ["/bin/bash", "./test/runtests.sh"]
+    links:
+      - redis
 
   redis:
     # image: "dionjwa/cloud-compute-cannon-redis:0.2.2"

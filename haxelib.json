@@ -12,10 +12,13 @@
         "redis",
         "lua"
     ], 
-    "url": "https://github.com/dionjwa/haxe-nodejs-redis", 
+    "url": "https://github.com/dionjwa/hxnodejs-redis-lua", 
     "releasenote": "Using better event abstracts.", 
     "classPath": "src", 
-    "version": "1.2.0", 
-    "dependencies": {}, 
-    "name": "nodejs-redis"
+    "version": "1.0.0", 
+    "dependencies": {
+        "promhx": "1.1.0",
+        "hxnodejs-redis": "2.4.2"
+    }, 
+    "name": "hxnodejs-redis-lua"
 }

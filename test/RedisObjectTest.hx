@@ -1,8 +1,18 @@
 @:build(t9.redis.RedisObject.build())
 class RedisObjectTest
 {
+	static var INLINE_INTERPOLATED_STRING :String = 'print("${RedisObjectScriptDependency.Value1}")';
+
+	/**
+	 * This contains a manually interpolated string. Metadata cannot do
+	 * interpolated strings, so the string manually has the content of
+	 * ${...} entries replaced with the content. The replaced keys
+	 * must be either static class string vars, or entries in the
+	 * SCRIPTS map (that is created at compile time).
+	 */
 	@redis({
 		lua:'
+			${INLINE_INTERPOLATED_STRING}
 			local input = ARGV[1]
 			local n = tonumber(input)
 			return n + 1

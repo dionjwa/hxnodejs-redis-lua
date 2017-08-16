@@ -3,7 +3,7 @@ class TestRedisBase extends PromiseTest
 	static function getRedisClient() :Promise<RedisClient>
 	{
 		var promise = new DeferredPromise();
-		var client = RedisClient.createClient(6379, 'redis');
+		var client = Redis.createClient(6379, 'redis', {});
 		client.on(RedisEvent.Error, function(err) {
 			promise.boundPromise.reject(err);
 		});

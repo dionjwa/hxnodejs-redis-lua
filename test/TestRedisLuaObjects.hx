@@ -1,5 +1,6 @@
 class TestRedisLuaObjects extends TestRedisBase
 {
+	@timeout(100)
 	public function testLuaObjectMethods1() :Promise<Bool>
 	{
 		return RedisObjectTest.init(_redisClient)
@@ -13,6 +14,7 @@ class TestRedisLuaObjects extends TestRedisBase
 			});
 	}
 
+	@timeout(100)
 	public function testLuaObjectMethods2() :Promise<Bool>
 	{
 		return RedisObjectTest.init(_redisClient)

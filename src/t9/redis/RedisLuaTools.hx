@@ -1,6 +1,6 @@
 package t9.redis;
 
-import js.npm.RedisClient;
+import js.npm.redis.RedisClient;
 
 import promhx.Promise;
 import promhx.deferred.DeferredPromise;
@@ -28,7 +28,7 @@ class RedisLuaTools
 			throw 'RedisLuaTools.initLuaScripts Missing client:RedisClient';
 		}
 		if (scripts == null) {
-			throw 'RedisLuaTools.initLuaScripts Missing scripts:scripts';
+			throw 'RedisLuaTools.initLuaScripts Missing scripts:Map<String, String>';
 		}
 
 		var deferred = new DeferredPromise();
@@ -68,7 +68,7 @@ class RedisLuaTools
 			throw 'RedisLuaTools.evaluateLuaScript Missing client:RedisClient';
 		}
 		if (scriptId == null) {
-			throw 'RedisLuaTools.evaluateLuaScript Missing scriptId:scriptId';
+			throw 'RedisLuaTools.evaluateLuaScript Missing scriptId:String';
 		}
 		var deferred = new DeferredPromise();
 		var command :Array<Dynamic> = [scriptId, redisKeys != null ? redisKeys.length : 0];

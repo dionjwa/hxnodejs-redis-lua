@@ -1,3 +1,6 @@
 [submodule "lib/haxe-js-kit"]
 	path = lib/haxe-js-kit
 	url = https://github.com/clemos/haxe-js-kit.git
+[submodule "lib/hxnodejs-redis"]
+	path = lib/hxnodejs-redis
+	url = git@github.com:dionjwa/hxnodejs-redis.git

@@ -1,0 +1,1 @@
+haxe -cmd 'node build/tests.js' test/travis.hxml

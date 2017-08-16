@@ -1,25 +1,6 @@
 {
-  "name": "haxe-nodejs-redis",
-  "version": "2.0.0",
-  "description": "",
-  "author": "Dion Whitehead Amago <dion@transition9.com>",
-  "contributors": [
-    {
-      "name": "Dion Whitehead Amago",
-      "email": "dion@transition9.com"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dionjwa/haxe-nodejs-redis"
-  },
-  "keywords": [
-    "haxe",
-    "nodejs",
-    "node",
-    "lua",
-    "redis"
-  ],
+  "name": "hxnodejs-redis-lua",
+  "version": "0.0.1",
   "dependencies": {
     "redis": "2.8.0"
   },

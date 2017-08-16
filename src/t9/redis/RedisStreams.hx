@@ -5,7 +5,7 @@ package t9.redis;
  * and exposes a bunch of methods for getting and sending objects
  * mostly with streams listening on the redis channels.
  */
-import js.npm.RedisClient;
+import js.npm.redis.RedisClient;
 import promhx.Promise;
 import promhx.deferred.DeferredPromise;
 
