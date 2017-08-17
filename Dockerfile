@@ -15,7 +15,11 @@ WORKDIR /usr/src/app
 
 # install dependencies
 COPY *.hxml /usr/src/app/
-RUN yes | haxelib install all
+RUN haxelib git hxnodejs-redis https://github.com/proletariatgames/hxnodejs-redis.git
+RUN haxelib install hxnodejs 4.0.9
+RUN haxelib install promhx 1.1.0
+RUN haxelib install promhx-unit-test 2.1.2
+# RUN yes | haxelib install all
 
 COPY package.json /usr/src/app/
 RUN npm i

@@ -4,7 +4,6 @@ class Tests
 {
 	public static function main():Void
 	{
-		trace('Running tests');
 		new PromiseTestRunner()
 			.add(new TestRedisCore())
 			.add(new TestRedisLuaObjects())
