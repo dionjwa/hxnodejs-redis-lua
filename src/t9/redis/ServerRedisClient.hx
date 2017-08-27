@@ -5,7 +5,9 @@ package t9.redis;
  * normal tasks, the other for listening to subscribed channels.
  */
 
+import js.npm.Redis;
 import js.npm.redis.RedisClient;
+
 import promhx.Promise;
 import promhx.RetryPromise;
 import promhx.Stream;
@@ -80,7 +82,7 @@ class ServerRedisClient
 			port: opts.port,
 			host: opts.host
 		}
-		var client = RedisClient.createClient(opts.port, opts.host, opts.opts);
+		var client = Redis.createClient(opts.port, opts.host, opts.opts);
 		var promise = new DeferredPromise();
 		client.once(RedisEvent.Connect, function() {
 			if (Log != null) {
@@ -97,7 +99,7 @@ class ServerRedisClient
 		});
 		client.on(RedisEvent.Error, function(err) {
 			if (!promise.boundPromise.isResolved()) {
-				client.end();
+				client.end(true);
 				promise.boundPromise.reject(err);
 			} else {
 				if (Log != null) {
