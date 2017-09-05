@@ -26,7 +26,6 @@ class RedisObject
 		var pos = haxe.macro.Context.currentPos();
 
 		createScriptsFields(fields, pos);
-
 		var luaScripts = new Map<String,String>();
 
 		for (field in fields) {
@@ -67,11 +66,6 @@ class RedisObject
 			for (name in luaScripts.keys()) {
 				luaFunctionToCodeMap.push(macro $v{name} => $v{luaScripts.get(name)});
 			}
-			//Get any fields that are upper case the same name
-			//as the function, and those strings will go in
-			// for (field in fields) {
-			// 	if ()
-			// }
 			fields.push({
 				// The line position that will be referenced on error
 				pos: pos,
