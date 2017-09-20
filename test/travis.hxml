@@ -5,7 +5,10 @@
 -lib hxnodejs:4.0.9
 -lib promhx
 -lib promhx-unit-test:2.1.2
--lib hxnodejs-redis
+
+-lib haxe-misc-tools:git:https://github.com/dionjwa/haxe-misc-tools.git#master
+# -lib hxnodejs-redis
+-lib hxnodejs-redis:git:https://github.com/dionjwa/hxnodejs-redis.git#master
 
 -cp src
 -cp test

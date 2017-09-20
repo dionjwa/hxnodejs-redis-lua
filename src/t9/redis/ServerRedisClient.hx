@@ -72,7 +72,7 @@ class ServerRedisClient
 
 	static function getRedisClient(opts :RedisOpts) :Promise<RedisClient>
 	{
-		return promhx.RetryPromise.pollDecayingInterval(getRedisClientInternal.bind(opts), 6, 500, 'getRedisClient');
+		return promhx.RetryPromise.retryDecayingInterval(getRedisClientInternal.bind(opts), 6, 500, 'getRedisClient');
 	}
 
 	static function getRedisClientInternal(opts :RedisOpts) :Promise<RedisClient>
