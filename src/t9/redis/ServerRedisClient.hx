@@ -5,7 +5,6 @@ package t9.redis;
  * normal tasks, the other for listening to subscribed channels.
  */
 
-import js.npm.Redis;
 import js.npm.redis.RedisClient;
 
 import promhx.Promise;
