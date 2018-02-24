@@ -1,1 +1,15 @@
-test/travis.hxml
+-debug
+
+-D nodejs
+
+-lib hxnodejs:4.0.9
+-lib promhx
+-lib promhx-unit-test:2.1.2
+-lib hxnodejs-redis:git:https://github.com/dionjwa/hxnodejs-redis.git#3eef451
+
+-cp src
+-cp test
+
+-main Tests
+
+-js build/tests.js

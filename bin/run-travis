@@ -2,6 +2,8 @@
 
 set -e
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
 # echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 # echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
@@ -10,9 +12,31 @@ echo "Running tests"
 #Run the tests
 # TRAVIS=1 docker-compose up --abort-on-container-exit
 
-docker-compose run haxe /bin/bash ./test/runtests.sh
+HAXELIB_NAME="hxnodejs-redis"
+source $DIR/haxelib_tools.sh
+
+CURRENT_HAXELIB_VERSION=$(getHaxelibVersion $HAXELIB_NAME)
+
+# docker-compose run haxe /bin/bash ./test/runtests.sh
+# LIBNAME="hxnodejs-redis"
+# CURRENT_HAXELIB_VERSION=$(haxelib info $LIBNAME \
+#   | grep Version \
+#   | head -1 \
+#   | awk -F: '{ print $2 }' \
+#   | sed 's/[",]//g' \
+#   | tr -d '[[:space:]]')
 
 
+# CURRENT_HAXELIB_VERSION=$(getHaxelibVersion "hxnodejs-redis")
+# CURRENT_HAXELIB_VERSION="2.4.3"
+echo $CURRENT_HAXELIB_VERSION
+
+
+echo "DIR=$DIR"
+NEXT=$($DIR/increment_version.sh -p $CURRENT_HAXELIB_VERSION)
+echo $NEXT
+# NEW_HAXELIB_VERSION=$($DIR/increment_version.sh -p $CURRENT_HAXELIB_VERSION)
+# echo $NEW_HAXELIB_VERSION
 # docker-compose up --abort-on-container-exit ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | while read code; do
 #     if [ "$code" == "1" ]; then
 #        exit -1

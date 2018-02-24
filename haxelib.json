@@ -17,8 +17,6 @@
     "classPath": "src", 
     "version": "1.0.0", 
     "dependencies": {
-        "promhx": "1.1.0",
-        "hxnodejs-redis": "2.4.2"
     }, 
     "name": "hxnodejs-redis-lua"
 }
