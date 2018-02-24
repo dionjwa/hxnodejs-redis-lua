@@ -82,7 +82,7 @@ class ServerRedisClient
 			port: opts.port,
 			host: opts.host
 		}
-		var client = Redis.createClient(opts.port, opts.host, opts.opts);
+		var client = RedisClient.createClient(opts.port, opts.host, opts.opts);
 		var promise = new DeferredPromise();
 		client.once(RedisEvent.Connect, function() {
 			if (Log != null) {
