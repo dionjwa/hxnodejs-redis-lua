@@ -50,7 +50,7 @@ class ServerRedisClient
 	function new(c1 :RedisClient, c2 :RedisClient, ?logger :RedisLogger)
 	{
 		_client = c1;
-		_subscribeClient = c1;
+		_subscribeClient = c2;
 		Log = logger != null ? logger : {
 			debug :function(val, ?pos :haxe.PosInfos) trace(val),
 			info :function(val, ?pos :haxe.PosInfos) trace(val),
