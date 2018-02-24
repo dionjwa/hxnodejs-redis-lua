@@ -26,7 +26,6 @@ class RedisObject
 		var pos = haxe.macro.Context.currentPos();
 
 		createScriptsFields(fields, pos);
-
 		var luaScripts = new Map<String,String>();
 
 		for (field in fields) {
@@ -63,29 +62,26 @@ class RedisObject
 					Context.error('${Context.getLocalModule()}: VAR_NAME_SCRIPTS variable must be a Map<String,String>', pos);
 				}
 		} else {
-			var luaFunctionToCodeMap : Array<Expr> = [];
-			for (name in luaScripts.keys()) {
-				luaFunctionToCodeMap.push(macro $v{name} => $v{luaScripts.get(name)});
+			if (luaScripts.keys().hasNext()) {
+				var luaFunctionToCodeMap : Array<Expr> = [];
+				for (name in luaScripts.keys()) {
+					luaFunctionToCodeMap.push(macro $v{name} => $v{luaScripts.get(name)});
+				}
+				fields.push({
+					// The line position that will be referenced on error
+					pos: pos,
+					// Field name
+					name: VAR_NAME_SCRIPTS,
+					// Attached metadata (we are not adding any)
+					meta: null,
+					// Field type is Map<String, String>, `luaFunctionToCodeMap` is the map
+					kind: FieldType.FVar(macro : Map<String, String>, macro $a{luaFunctionToCodeMap}),
+					// Documentation (we are not adding any)
+					doc: null,
+					// Field visibility
+					access: [Access.AStatic]
+				});
 			}
-			//Get any fields that are upper case the same name
-			//as the function, and those strings will go in
-			// for (field in fields) {
-			// 	if ()
-			// }
-			fields.push({
-				// The line position that will be referenced on error
-				pos: pos,
-				// Field name
-				name: VAR_NAME_SCRIPTS,
-				// Attached metadata (we are not adding any)
-				meta: null,
-				// Field type is Map<String, String>, `luaFunctionToCodeMap` is the map
-				kind: FieldType.FVar(macro : Map<String, String>, macro $a{luaFunctionToCodeMap}),
-				// Documentation (we are not adding any)
-				doc: null,
-				// Field visibility
-				access: [Access.AStatic]
-			});
 		}
 
 		return fields;
