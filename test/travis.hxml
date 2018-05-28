@@ -8,7 +8,7 @@
 
 -lib haxe-misc-tools:git:https://github.com/dionjwa/haxe-misc-tools.git#master
 # -lib hxnodejs-redis
--lib hxnodejs-redis:git:https://github.com/dionjwa/hxnodejs-redis.git#master
+-lib hxnodejs-redis:git:https://github.com/dionjwa/hxnodejs-redis.git#3eef451
 
 -cp src
 -cp test
