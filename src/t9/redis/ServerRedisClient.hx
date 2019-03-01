@@ -5,7 +5,7 @@ package t9.redis;
  * normal tasks, the other for listening to subscribed channels.
  */
 
-import js.npm.Redis;
+import js.npm.ioredis.Redis;
 import js.npm.redis.RedisClient;
 
 import promhx.Promise;
@@ -82,7 +82,7 @@ class ServerRedisClient
 			port: opts.port,
 			host: opts.host
 		}
-		var client = Redis.createClient(opts.port, opts.host, opts.opts);
+		var client = new Redis(opts.port, opts.host, opts.opts);
 		var promise = new DeferredPromise();
 		client.once(RedisEvent.Connect, function() {
 			if (Log != null) {
@@ -90,7 +90,7 @@ class ServerRedisClient
 			}
 			//Only resolve once connected
 			if (!promise.boundPromise.isResolved()) {
-				promise.resolve(client);
+				promise.resolve(cast client);
 			} else {
 				if (Log != null) {
 					Log.error({log:'Got redis connection, but our promise is already resolved ${redisParams.host}:${redisParams.port}'});

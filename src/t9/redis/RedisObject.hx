@@ -250,6 +250,9 @@ class RedisObject
 					],
 					expr: Context.parse(
 					'{
+						if (redis == null) {
+							throw "redis argument null";
+						}
 						for (key in $VAR_NAME_SCRIPTS.keys()) {
 							var script = $VAR_NAME_SCRIPTS.get(key);
 							for (classFieldName in Type.getClassFields(${Context.getLocalModule()})) {
