@@ -36,7 +36,7 @@ class ServerRedisClient
 			.pipe(function(c1) {
 				return getRedisClient(opts)
 					.then(function(c2) {
-						return new ServerRedisClient(c1, c2);
+						return new ServerRedisClient(c1, c2, opts);
 					});
 			});
 	}
@@ -47,17 +47,25 @@ class ServerRedisClient
 	var _client :RedisClient;
 	var _subscribeClient :RedisClient;
 	var _subscriptions :Map<String, Array<Stream<String>>> = new Map();
+	var _opts :Dynamic;
 
-	function new(c1 :RedisClient, c2 :RedisClient, ?logger :RedisLogger)
+	function new(c1 :RedisClient, c2 :RedisClient, opts :Dynamic, ?logger :RedisLogger)
 	{
 		_client = c1;
 		_subscribeClient = c2;
+		_opts = opts;
+		Assert.notNull(_opts);
 		Log = logger != null ? logger : {
 			debug :function(val, ?pos :haxe.PosInfos) trace(val),
 			info :function(val, ?pos :haxe.PosInfos) trace(val),
 			warn :function(val, ?pos :haxe.PosInfos) trace(val),
 			error :function(val, ?pos :haxe.PosInfos) trace(val)
 		};
+	}
+
+	public function newClient() :RedisClient
+	{
+		return new Redis(_opts.port, _opts.host, {});
 	}
 
 	function get_client() :RedisClient

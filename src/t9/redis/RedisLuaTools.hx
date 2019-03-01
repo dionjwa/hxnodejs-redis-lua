@@ -47,14 +47,14 @@ class RedisLuaTools
 					deferred.boundPromise.reject(err);
 					return;
 				}
-				var scriptShas :Array<String> = result.map(Std.string);
 				var scriptIdToSha1 = new Map<String, String>();
-				for (i in 0...scriptShas.length) {
-					if (scriptShas[i].startsWith('Err') || scriptShas[i].startsWith('ERR') || scriptShas[i].startsWith('ReplyError')) {
-						deferred.boundPromise.reject(scriptIds[i] + '=' + scriptShas[i] + '\n' + scripts[scriptIds[i]].split('\n').mapi(function(i, e) return i + '\t' + e).join('\n'));
+				for (i in 0...result.length) {
+					var scriptEvalResult :Array<String> = result[i];
+					if (scriptEvalResult[0] != null) {
+						deferred.boundPromise.reject(scriptIds[i] + '=' + scriptEvalResult[0] + '\n' + scripts[scriptIds[i]].split('\n').mapi(function(i, e) return i + '\t' + e).join('\n'));
 						return;
 					}
-					scriptIdToSha1[scriptIds[i]] = scriptShas[i];
+					scriptIdToSha1[scriptIds[i]] = scriptEvalResult[1];
 				}
 				deferred.resolve(scriptIdToSha1);
 			});
